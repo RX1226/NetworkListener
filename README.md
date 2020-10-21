@@ -23,7 +23,7 @@ A network change Listener for Android.
 2. Add the dependency:
 ```
     dependencies {
-        implementation 'com.github.RX1226:NetworkListener:1.0.1'
+        implementation 'com.github.RX1226:NetworkListener:1.0.2'
     }
 ```
 
@@ -73,7 +73,7 @@ b. register observer and unregister observer
     @Override
     protected void onResume() {
         super.onResume();
-        networkListener.onRegisterObserver();
+        networkListener.registerObserver();
     }
 
     @Override
