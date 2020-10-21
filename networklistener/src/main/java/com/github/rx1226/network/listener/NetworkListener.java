@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class NetworkListener {
+    private boolean isRegistered;
     private ConnectivityManager connectivityManager;
     private NetworkCallback networkCallback;
 
@@ -20,8 +21,11 @@ public class NetworkListener {
         networkCallback.setNetworkListener(listener);
     }
 
-    public void onRegisterObserver(){
-        if(connectivityManager != null) connectivityManager.registerDefaultNetworkCallback(networkCallback);
+    public void registerObserver(){
+        if(connectivityManager != null && !isRegistered) {
+            connectivityManager.registerDefaultNetworkCallback(networkCallback);
+            isRegistered = true;
+        }
     }
 
     public void unRegisterObserver() {
@@ -31,6 +35,7 @@ public class NetworkListener {
             }catch (Exception e){
                 e.printStackTrace();
             }
+            isRegistered = false;
         }
     }
 }

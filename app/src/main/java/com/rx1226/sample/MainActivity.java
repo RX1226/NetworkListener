@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        networkListener.onRegisterObserver();
+        networkListener.registerObserver();
     }
 
     @Override
