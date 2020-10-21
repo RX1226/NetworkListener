@@ -11,20 +11,9 @@ public class NetworkListener {
     private ConnectivityManager connectivityManager;
     private NetworkCallback networkCallback;
 
-    private static NetworkListener instance;
-    private NetworkListener(){
-        networkCallback = new NetworkCallback();
-    }
-
-    public static NetworkListener getInstance(){
-        if(instance == null){
-            instance = new NetworkListener();
-        }
-        return instance;
-    }
-
-    public void init(Context context){
+    public NetworkListener(Context context){
         connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        networkCallback = new NetworkCallback();
     }
 
     public void setOnChangeListener(OnChangeListener listener){
@@ -36,6 +25,12 @@ public class NetworkListener {
     }
 
     public void unRegisterObserver() {
-        if(connectivityManager != null) connectivityManager.unregisterNetworkCallback(networkCallback);
+        if(connectivityManager != null){
+            try {
+                connectivityManager.unregisterNetworkCallback(networkCallback);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 }

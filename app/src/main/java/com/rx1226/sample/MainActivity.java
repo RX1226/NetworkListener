@@ -17,8 +17,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         //Listener to network connect statue
-        networkListener = NetworkListener.getInstance();
-        networkListener.init(this);
+        networkListener = new NetworkListener(this);
         networkListener.setOnChangeListener((state, network) -> {
             switch (state){
                 case NetworkState.AVAILABLE:
