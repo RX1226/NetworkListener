@@ -10,6 +10,7 @@ import com.github.rx1226.network.listener.NetworkListener;
 import com.github.rx1226.network.listener.NetworkState;
 
 public class MainActivity extends AppCompatActivity{
+    private final static String TAG = "MainActivity";
     private NetworkListener networkListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity{
         if(NetworkKit.isNetworkConnect(this)){
             //if network is connect
         }
+        Log.d(TAG, "Speed Tx = " + NetworkKit.getTxKbps(this));
+        Log.d(TAG, "Speed Rx = " + NetworkKit.getRxKbps(this));
     }
 
     @Override
