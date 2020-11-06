@@ -1,4 +1,4 @@
-package com.github.rx1226.network.listener;
+package com.github.rx1226.network.listener.status;
 
 import android.net.ConnectivityManager;
 import android.net.Network;
@@ -7,9 +7,6 @@ import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-
-import com.github.rx1226.network.listener.NetworkState;
-import com.github.rx1226.network.listener.OnChangeListener;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class NetworkCallback extends ConnectivityManager.NetworkCallback{

@@ -6,12 +6,15 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.rx1226.network.NetworkKit;
-import com.github.rx1226.network.listener.NetworkListener;
-import com.github.rx1226.network.listener.NetworkState;
+import com.github.rx1226.network.listener.speed.NetworkSpeedListener;
+import com.github.rx1226.network.listener.speed.OnSpeedListener;
+import com.github.rx1226.network.listener.status.NetworkListener;
+import com.github.rx1226.network.listener.status.NetworkState;
 
 public class MainActivity extends AppCompatActivity{
     private final static String TAG = "MainActivity";
     private NetworkListener networkListener;
+    private NetworkSpeedListener networkSpeedListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,19 +43,25 @@ public class MainActivity extends AppCompatActivity{
         if(NetworkKit.isNetworkConnect(this)){
             //if network is connect
         }
-        Log.d(TAG, "Speed Tx = " + NetworkKit.getTxKbps(this));
-        Log.d(TAG, "Speed Rx = " + NetworkKit.getRxKbps(this));
+
+        //listener speed tx rx
+        networkSpeedListener = new NetworkSpeedListener();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         networkListener.registerObserver();
+        networkSpeedListener.start((tx, rx) -> {
+            Log.d(TAG, "Speed Tx = " + tx);
+            Log.d(TAG, "Speed Rx = " + rx);
+        });
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         networkListener.unRegisterObserver();
+        networkSpeedListener.stop();
     }
 }

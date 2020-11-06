@@ -1,4 +1,4 @@
-package com.github.rx1226.network.listener;
+package com.github.rx1226.network.listener.status;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
