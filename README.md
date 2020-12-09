@@ -88,7 +88,19 @@ c. also can use kit to check network connect
        //if network is connect
     }
 ```
+d. speed listener
+
+```
+    NetworkSpeedListener networkSpeedListener = new NetworkSpeedListener();
+    networkSpeedListener.start((tx, rx) -> {
+        Log.d(TAG, "Speed Tx = " + tx);
+        Log.d(TAG, "Speed Rx = " + rx);
+    });
+    networkSpeedListener.stop();
+```
+
 ## License
+
 	Copyright 2020 RX1226
 	
 	Licensed under the Apache License, Version 2.0 (the "License");
