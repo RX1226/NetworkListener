@@ -23,7 +23,7 @@ A network change Listener for Android.
 2. Add the dependency:
 ```
     dependencies {
-        implementation 'com.github.RX1226:NetworkListener:1.0.2'
+        implementation 'com.github.RX1226:NetworkListener:1.0.3'
     }
 ```
 
