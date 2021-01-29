@@ -25,27 +25,37 @@ public class MainActivity extends AppCompatActivity{
         networkListener.setOnChangeListener((state, network) -> {
             switch (state){
                 case NetworkState.AVAILABLE:
-                    Log.d("TAG", "Network is " + NetworkState.AVAILABLE);
+                    Log.d(TAG, "Network is " + NetworkState.AVAILABLE);
                     break;
                 case NetworkState.LOST:
-                    Log.d("TAG", "Network is " + NetworkState.LOST);
+                    Log.d(TAG, "Network is " + NetworkState.LOST);
                     break;
                 case NetworkState.CHANGE_TO_MOBILE:
-                    Log.d("TAG", "Network is " + NetworkState.CHANGE_TO_MOBILE);
+                    Log.d(TAG, "Network is " + NetworkState.CHANGE_TO_MOBILE);
                     break;
                 case NetworkState.CHANGE_TO_WIFI:
-                    Log.d("TAG", "Network is " + NetworkState.CHANGE_TO_WIFI);
+                    Log.d(TAG, "Network is " + NetworkState.CHANGE_TO_WIFI);
                     break;
             }
         });
 
-        //kit to check connect
-        if(NetworkKit.isNetworkConnect(this)){
-            //if network is connect
-        }
-
         //listener speed tx rx
         networkSpeedListener = new NetworkSpeedListener();
+
+        NetworkKit networkKit = new NetworkKit(this);
+        //kit to check connect
+        if(networkKit.isNetworkConnect()){
+            Log.d(TAG, "Network is connect");
+        }
+        if(networkKit.isMobileConnected()){
+            Log.d(TAG, "Mobile is connect");
+        }
+        if(networkKit.isWifiConnected()){
+            Log.d(TAG, "Wifi is connect");
+        }
+        Log.d(TAG, "Country Iso = " + networkKit.getNetworkCountryIso());
+        Log.d(TAG, "Ip = " + networkKit.getIp());
+        Log.d(TAG, "Mac address = " + networkKit.getMacAddress());
     }
 
     @Override

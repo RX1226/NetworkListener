@@ -82,11 +82,22 @@ b. register observer and unregister observer
         networkListener.unRegisterObserver();
     }
 ```
-c. also can use kit to check network connect
+c. also can use kit to check network status
 ```
-    if(NetworkKit.isNetworkConnect(this)){
-       //if network is connect
-    }
+        NetworkKit networkKit = new NetworkKit(this);
+        //kit to check connect
+        if(networkKit.isNetworkConnect()){
+            Log.d(TAG, "Network is connect");
+        }
+        if(networkKit.isMobileConnected()){
+            Log.d(TAG, "Mobile is connect");
+        }
+        if(networkKit.isWifiConnected()){
+            Log.d(TAG, "Wifi is connect");
+        }
+        Log.d(TAG, "Country Iso = " + networkKit.getNetworkCountryIso());
+        Log.d(TAG, "Ip = " + networkKit.getIp());
+        Log.d(TAG, "Mac address = " + networkKit.getMacAddress());
 ```
 d. speed listener
 
