@@ -4,12 +4,12 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.RX1226'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 29
-        versionCode 4
-        versionName "1.0.4"
+        targetSdkVersion 31
+        versionCode 5
+        versionName "1.0.5"
     }
 
     buildTypes {
@@ -26,5 +26,5 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api 'androidx.appcompat:appcompat:1.2.0'
+    api 'androidx.appcompat:appcompat:1.4.0'
 }
