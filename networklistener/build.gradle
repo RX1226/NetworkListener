@@ -3,13 +3,30 @@ apply plugin: 'maven-publish'
 
 group='com.github.RX1226'
 
+def verMajor = 1
+def verMinor = 0
+def verUpdate = 6
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.RX1226'
+                artifactId = 'networklistener'
+                version = "${verMajor}.${verMinor}.${verUpdate}"
+            }
+        }
+    }
+}
+
 android {
     compileSdkVersion 31
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 31
-        versionCode 6
-        versionName "1.0.6"
+        versionCode verMajor * 1000 + verMinor * 100 + verUpdate
+        versionName "${verMajor}.${verMinor}.${verUpdate}"
     }
 
     buildTypes {
@@ -26,5 +43,5 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    api 'androidx.appcompat:appcompat:1.4.0'
+    api 'androidx.appcompat:appcompat:1.4.1'
 }
