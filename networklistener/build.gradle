@@ -12,7 +12,7 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 from components.release
-                groupId = 'com.github.RX1226'
+                groupId = 'com.github.RX1226.network'
                 artifactId = 'networklistener'
                 version = "${verMajor}.${verMinor}.${verUpdate}"
             }
