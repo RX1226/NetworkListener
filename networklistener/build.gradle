@@ -4,8 +4,8 @@ plugins{
 }
 
 def verMajor = 1
-def verMinor = 0
-def verUpdate = 10
+def verMinor = 1
+def verUpdate = 0
 
 afterEvaluate {
     publishing {
@@ -42,7 +42,8 @@ android {
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
-    api 'androidx.appcompat:appcompat:1.4.1'
-    testImplementation 'junit:junit:4.13.2'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def appcompat_version = "1.4.1"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.appcompat:appcompat-resources:$appcompat_version"
 }

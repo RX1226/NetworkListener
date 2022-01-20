@@ -12,28 +12,24 @@ import java.util.List;
 
 public class NetworkKit {
     private final Context context;
-    private final ConnectivityManager connectivityManager;
+    private final NetworkInfo networkInfo;
     public NetworkKit(Context context){
         this.context = context;
-        connectivityManager = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        networkInfo = connectivityManager.getActiveNetworkInfo();
     }
+
     //檢查是否有網路
     public boolean isNetworkConnect(){
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        return (networkInfo != null) && networkInfo.isConnected();
+        return networkInfo.isConnected();
     }
     //檢查是否有Wifi
     public boolean isWifiConnected() {
-        return isConnected(ConnectivityManager.TYPE_WIFI);
+        return networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
     }
     //檢查是否有手機網路
     public boolean isMobileConnected() {
-        return isConnected(ConnectivityManager.TYPE_MOBILE);
-    }
-    //檢查是否有網路
-    private boolean isConnected(int type){
-        NetworkInfo networkInfo = connectivityManager.getNetworkInfo(type);
-        return (networkInfo != null) && networkInfo.isConnected();
+        return networkInfo.getType() == ConnectivityManager.TYPE_MOBILE;
     }
 
     private float valueOfMB(float bytes){
@@ -47,8 +43,8 @@ public class NetworkKit {
     public String getIp() {
         try {
             List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
-            for (NetworkInterface intf : interfaces) {
-                List<InetAddress> addresses = Collections.list(intf.getInetAddresses());
+            for (NetworkInterface networkInterface : interfaces) {
+                List<InetAddress> addresses = Collections.list(networkInterface.getInetAddresses());
                 for (InetAddress inetAddress : addresses) {
                     if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
                         return inetAddress.getHostAddress();

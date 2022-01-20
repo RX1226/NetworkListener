@@ -9,8 +9,8 @@ import androidx.annotation.RequiresApi;
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class NetworkListener {
     private boolean isRegistered;
-    private ConnectivityManager connectivityManager;
-    private NetworkCallback networkCallback;
+    private final ConnectivityManager connectivityManager;
+    private final NetworkCallback networkCallback;
 
     public NetworkListener(Context context){
         connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
