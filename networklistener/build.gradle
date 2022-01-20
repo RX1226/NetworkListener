@@ -1,6 +1,7 @@
-apply plugin: 'com.android.library'
-apply plugin: 'maven-publish'
-group = 'com.github.RX1226'
+plugins{
+    id 'com.android.library'
+    id 'maven-publish'
+}
 
 def verMajor = 1
 def verMinor = 0
@@ -20,12 +21,14 @@ afterEvaluate {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 30
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 31
+        targetSdkVersion 30
         versionCode verMajor * 1000 + verMinor * 100 + verUpdate
         versionName "${verMajor}.${verMinor}.${verUpdate}"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
