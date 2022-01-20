@@ -5,7 +5,7 @@ plugins{
 
 def verMajor = 1
 def verMinor = 0
-def verUpdate = 8
+def verUpdate = 9
 
 afterEvaluate {
     publishing {
