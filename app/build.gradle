@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 def verMajor = 1
 def verMinor = 0
-def verUpdate = 9
+def verUpdate = 10
 
 android {
     compileSdkVersion 31
