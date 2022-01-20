@@ -5,7 +5,7 @@ group='com.github.RX1226'
 
 def verMajor = 1
 def verMinor = 0
-def verUpdate = 6
+def verUpdate = 8
 
 afterEvaluate {
     publishing {
