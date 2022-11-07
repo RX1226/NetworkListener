@@ -2,19 +2,21 @@ package com.rx1226.sample;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.rx1226.network.NetworkKit;
 import com.github.rx1226.network.listener.speed.NetworkSpeedListener;
-import com.github.rx1226.network.listener.speed.OnSpeedListener;
 import com.github.rx1226.network.listener.status.NetworkListener;
 import com.github.rx1226.network.listener.status.NetworkState;
 
 public class MainActivity extends AppCompatActivity{
     private final static String TAG = "MainActivity";
     private NetworkListener networkListener;
-    private NetworkSpeedListener networkSpeedListener;
+    //listener speed tx rx
+    private final NetworkSpeedListener networkSpeedListener = new NetworkSpeedListener();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +41,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        //listener speed tx rx
-        networkSpeedListener = new NetworkSpeedListener();
-
         NetworkKit networkKit = new NetworkKit(this);
         //kit to check connect
         if(networkKit.isNetworkConnect()){
@@ -53,6 +52,9 @@ public class MainActivity extends AppCompatActivity{
         if(networkKit.isWifiConnected()){
             Log.d(TAG, "Wifi is connect");
         }
+        if(networkKit.isEthernetConnected()){
+            Log.d(TAG, "Ethernet is connect");
+        }
         Log.d(TAG, "Country Iso = " + networkKit.getNetworkCountryIso());
         Log.d(TAG, "Ip = " + networkKit.getIp());
         Log.d(TAG, "Mac address = " + networkKit.getMacAddress());
@@ -62,16 +64,21 @@ public class MainActivity extends AppCompatActivity{
     protected void onResume() {
         super.onResume();
         networkListener.registerObserver();
+    }
+
+    @Override
+    public void onStop() {
+        networkListener.unRegisterObserver();
+        super.onStop();
+    }
+
+    public void start(View view){
         networkSpeedListener.start((tx, rx) -> {
             Log.d(TAG, "Speed Tx = " + tx);
             Log.d(TAG, "Speed Rx = " + rx);
         });
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        networkListener.unRegisterObserver();
+    public void stop(View view){
         networkSpeedListener.stop();
     }
 }

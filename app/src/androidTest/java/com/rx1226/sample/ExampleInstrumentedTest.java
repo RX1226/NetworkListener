@@ -1,4 +1,4 @@
-package com.rx1226.appupdater;
+package com.rx1226.sample;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

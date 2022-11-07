@@ -1,4 +1,4 @@
-package com.rx1226.appupdater;
+package com.rx1226.sample;
 
 import org.junit.Test;
 
