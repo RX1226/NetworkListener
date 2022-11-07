@@ -5,11 +5,12 @@ def verMinor = 1
 def verUpdate = 0
 
 android {
-    compileSdkVersion 31
+    namespace 'com.rx1226.sample'
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.rx1226.networklistener"
         minSdkVersion 24
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode verMajor * 1000 + verMinor * 100 + verUpdate
         versionName "${verMajor}.${verMinor}.${verUpdate}"
     }

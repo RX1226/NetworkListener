@@ -21,10 +21,11 @@ afterEvaluate {
 }
 
 android {
-    compileSdkVersion 31
+    namespace 'com.github.rx1226.network'
+    compileSdkVersion 33
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode verMajor * 1000 + verMinor * 100 + verUpdate
         versionName "${verMajor}.${verMinor}.${verUpdate}"
     }
@@ -43,7 +44,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    def appcompat_version = "1.4.1"
+    def appcompat_version = "1.5.1"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.appcompat:appcompat-resources:$appcompat_version"
 }
