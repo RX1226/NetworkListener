@@ -13,7 +13,7 @@ import com.github.rx1226.network.listener.status.NetworkState;
 
 public class MainActivity extends AppCompatActivity{
     private final static String TAG = "MainActivity";
-    private NetworkKit networkKit;
+    private NetworkStatusListener networkStatusListener;
     //listener speed tx rx
     private final NetworkSpeedListener networkSpeedListener = new NetworkSpeedListener();
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        networkKit = new NetworkKit(this);
+        NetworkKit networkKit = new NetworkKit(this);
         //kit to check connect
         if(networkKit.isNetworkConnect()){
             Log.d(TAG, "Network is connect");
@@ -63,12 +63,12 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        networkKit.registerObserver();
+        networkStatusListener.registerObserver();
     }
 
     @Override
     public void onStop() {
-        networkKit.unRegisterObserver();
+        networkStatusListener.unRegisterObserver();
         super.onStop();
     }
 
