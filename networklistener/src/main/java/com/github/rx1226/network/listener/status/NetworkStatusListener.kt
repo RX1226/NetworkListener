@@ -3,7 +3,7 @@ package com.github.rx1226.network.listener.status
 import android.content.Context
 import android.net.ConnectivityManager
 
-class NetworkListener(context: Context) {
+class NetworkStatusListener(context: Context) {
     private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
     private val networkCallback = NetworkCallback()
     private var isRegistered = false

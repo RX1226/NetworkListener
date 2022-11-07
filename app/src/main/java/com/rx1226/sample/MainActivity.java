@@ -8,12 +8,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.rx1226.network.NetworkKit;
 import com.github.rx1226.network.listener.speed.NetworkSpeedListener;
-import com.github.rx1226.network.listener.status.NetworkListener;
+import com.github.rx1226.network.listener.status.NetworkStatusListener;
 import com.github.rx1226.network.listener.status.NetworkState;
 
 public class MainActivity extends AppCompatActivity{
     private final static String TAG = "MainActivity";
-    private NetworkListener networkListener;
+    private NetworkKit networkKit;
     //listener speed tx rx
     private final NetworkSpeedListener networkSpeedListener = new NetworkSpeedListener();
 
@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         //Listener to network connect statue
-        networkListener = new NetworkListener(this);
-        networkListener.setOnChangeListener((state, network) -> {
+        networkStatusListener = new NetworkStatusListener(this);
+        networkStatusListener.setOnChangeListener((state, network) -> {
             switch (state){
                 case NetworkState.AVAILABLE:
                     Log.d(TAG, "Network is " + NetworkState.AVAILABLE);
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-        NetworkKit networkKit = new NetworkKit(this);
+        networkKit = new NetworkKit(this);
         //kit to check connect
         if(networkKit.isNetworkConnect()){
             Log.d(TAG, "Network is connect");
@@ -63,12 +63,12 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        networkListener.registerObserver();
+        networkKit.registerObserver();
     }
 
     @Override
     public void onStop() {
-        networkListener.unRegisterObserver();
+        networkKit.unRegisterObserver();
         super.onStop();
     }
 

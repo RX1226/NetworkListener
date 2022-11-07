@@ -4,14 +4,23 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.telephony.TelephonyManager
+import com.github.rx1226.network.listener.status.NetworkStatusListener
+import com.github.rx1226.network.listener.status.OnChangeListener
 import java.net.Inet4Address
 import java.net.InetAddress
 import java.net.NetworkInterface
 import java.util.*
 
 class NetworkKit(context: Context) {
-    private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    private val telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+    private var connectivityManager :ConnectivityManager
+    private var telephonyManager :TelephonyManager
+    private var networkStatusListener :NetworkStatusListener
+
+    init {
+        connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        telephonyManager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        networkStatusListener = NetworkStatusListener(context)
+    }
 
     private fun getNetworkCapabilities(): NetworkCapabilities?{
         return try {
@@ -89,5 +98,17 @@ class NetworkKit(context: Context) {
             e.printStackTrace()
         }
         return "02:00:00:00:00:00" //官方後來只能取得的固定值
+    }
+
+    fun setOnChangeListener(listener: OnChangeListener) {
+        networkStatusListener.setOnChangeListener(listener)
+    }
+
+    fun registerObserver() {
+        networkStatusListener.registerObserver()
+    }
+
+    fun unRegisterObserver() {
+        networkStatusListener.unRegisterObserver()
     }
 }
